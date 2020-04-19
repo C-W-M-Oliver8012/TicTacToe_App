@@ -26,6 +26,109 @@ class GameActivity : AppCompatActivity() {
     private lateinit var gameType: String
     private var startingDepth: Int = 0
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_game)
+
+        val extra = intent.getStringExtra(EXTRA_MESSAGE)
+        gameType = extra as String
+
+        button1 = findViewById(R.id.button1)
+        button1.text = " "
+        button2 = findViewById(R.id.button2)
+        button2.text = " "
+        button3 = findViewById(R.id.button3)
+        button3.text = " "
+        button4 = findViewById(R.id.button4)
+        button4.text = " "
+        button5 = findViewById(R.id.button5)
+        button5.text = " "
+        button6 = findViewById(R.id.button6)
+        button6.text = " "
+        button7 = findViewById(R.id.button7)
+        button7.text = " "
+        button8 = findViewById(R.id.button8)
+        button8.text = " "
+        button9 = findViewById(R.id.button9)
+        button9.text = " "
+        winner = findViewById(R.id.winner)
+        winner.text = getString(R.string.game_in_progress)
+        winner.setTextColor (Color.parseColor("#000000"))
+        reset = findViewById(R.id.resetButton)
+        reset.text = getString(R.string.reset)
+        mode = findViewById(R.id.mode)
+        mode.text = gameType
+
+        turn = "PlayerOne"
+
+        if (gameType == "Easy") {
+            startingDepth = 2
+        }
+        else if (gameType == "Medium") {
+            startingDepth = 4
+        }
+        else if (gameType == "Hard") {
+            startingDepth = 10
+        }
+
+        button1.setOnClickListener {
+            buttonClick (button1)
+        }
+
+        button2.setOnClickListener {
+            buttonClick (button2)
+        }
+
+        button3.setOnClickListener {
+            buttonClick (button3)
+        }
+
+        button4.setOnClickListener {
+            buttonClick (button4)
+        }
+
+        button5.setOnClickListener {
+            buttonClick (button5)
+        }
+
+        button6.setOnClickListener {
+            buttonClick (button6)
+        }
+
+        button7.setOnClickListener {
+            buttonClick (button7)
+        }
+
+        button8.setOnClickListener {
+            buttonClick (button8)
+        }
+
+        button9.setOnClickListener {
+            buttonClick (button9)
+        }
+
+        reset.setOnClickListener {
+            button1.text = " "
+            button2.text = " "
+            button3.text = " "
+            button4.text = " "
+            button5.text = " "
+            button6.text = " "
+            button7.text = " "
+            button8.text = " "
+            button9.text = " "
+            turn = "PlayerOne"
+            win = false
+            winner.text = getString(R.string.game_in_progress)
+            winner.setTextColor (Color.parseColor("#000000"))
+            computerMovesFirst = computerMovesFirst == false
+
+            if (computerMovesFirst) {
+                computerTurn()
+            }
+        }
+    }
+
     private fun getBoard (): Array<String> {
         val cell1 = button1.text as String
         val cell2 = button2.text as String
@@ -304,108 +407,5 @@ class GameActivity : AppCompatActivity() {
         }
 
         return match
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_game)
-
-        val extra = intent.getStringExtra(EXTRA_MESSAGE)
-        gameType = extra as String
-
-        button1 = findViewById(R.id.button1)
-        button1.text = " "
-        button2 = findViewById(R.id.button2)
-        button2.text = " "
-        button3 = findViewById(R.id.button3)
-        button3.text = " "
-        button4 = findViewById(R.id.button4)
-        button4.text = " "
-        button5 = findViewById(R.id.button5)
-        button5.text = " "
-        button6 = findViewById(R.id.button6)
-        button6.text = " "
-        button7 = findViewById(R.id.button7)
-        button7.text = " "
-        button8 = findViewById(R.id.button8)
-        button8.text = " "
-        button9 = findViewById(R.id.button9)
-        button9.text = " "
-        winner = findViewById(R.id.winner)
-        winner.text = getString(R.string.game_in_progress)
-        winner.setTextColor (Color.parseColor("#000000"))
-        reset = findViewById(R.id.resetButton)
-        reset.text = getString(R.string.reset)
-        mode = findViewById(R.id.mode)
-        mode.text = gameType
-
-        turn = "PlayerOne"
-
-        if (gameType == "Easy") {
-            startingDepth = 2
-        }
-        else if (gameType == "Medium") {
-            startingDepth = 4
-        }
-        else if (gameType == "Hard") {
-            startingDepth = 10
-        }
-
-        button1.setOnClickListener {
-            buttonClick (button1)
-        }
-
-        button2.setOnClickListener {
-            buttonClick (button2)
-        }
-
-        button3.setOnClickListener {
-            buttonClick (button3)
-        }
-
-        button4.setOnClickListener {
-            buttonClick (button4)
-        }
-
-        button5.setOnClickListener {
-            buttonClick (button5)
-        }
-
-        button6.setOnClickListener {
-            buttonClick (button6)
-        }
-
-        button7.setOnClickListener {
-            buttonClick (button7)
-        }
-
-        button8.setOnClickListener {
-            buttonClick (button8)
-        }
-
-        button9.setOnClickListener {
-            buttonClick (button9)
-        }
-
-        reset.setOnClickListener {
-            button1.text = " "
-            button2.text = " "
-            button3.text = " "
-            button4.text = " "
-            button5.text = " "
-            button6.text = " "
-            button7.text = " "
-            button8.text = " "
-            button9.text = " "
-            turn = "PlayerOne"
-            win = false
-            winner.text = getString(R.string.game_in_progress)
-            winner.setTextColor (Color.parseColor("#000000"))
-            computerMovesFirst = computerMovesFirst == false
-
-            if (computerMovesFirst) {
-                computerTurn()
-            }
-        }
     }
 }
