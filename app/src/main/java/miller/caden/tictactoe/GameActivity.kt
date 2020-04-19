@@ -166,7 +166,7 @@ class GameActivity : AppCompatActivity() {
         return false
     }
 
-    private fun minimax (board: Array<String>, depth: Int, isMaximizing: Boolean): Int {
+    private fun minimax (board: Array<String>, depth: Int, alpha: Int, beta: Int, isMaximizing: Boolean): Int {
         val score: Int = scoreBoard(board)
 
         if (score == 100) {
@@ -187,7 +187,11 @@ class GameActivity : AppCompatActivity() {
             for (i in 0 until 9) {
                 if (board[i] == " ") {
                     board[i] = "O"
-                    value = max (value, minimax(board, depth - 1, false))
+                    value = max (value, minimax(board, depth - 1, alpha, beta, false))
+                    val alphaCheck = max (alpha, value)
+                    if (alphaCheck >= beta) {
+                        break
+                    }
                     board[i] = " "
                 }
             }
@@ -198,7 +202,11 @@ class GameActivity : AppCompatActivity() {
             for (i in 0 until 9) {
                 if (board[i] == " ") {
                     board[i] = "X"
-                    value = min (value, minimax(board, depth - 1, true))
+                    value = min (value, minimax(board, depth - 1, alpha, beta, true))
+                    val betaCheck = min (beta, value)
+                    if (alpha >= betaCheck) {
+                        break
+                    }
                     board[i] = " "
                 }
             }
@@ -216,7 +224,7 @@ class GameActivity : AppCompatActivity() {
         for (i in 0 until 9) {
             if (board[i] == " ") {
                 board[i] = "O"
-                moveScore = minimax(board, startingDepth, false)
+                moveScore = minimax(board, startingDepth, -1000, 1000, false)
                 board[i] = " "
                 evalCount++
                 if (evalCount == 1) {
@@ -229,8 +237,10 @@ class GameActivity : AppCompatActivity() {
                     best = moveScore
                     move = i
                 }
+                print ("$moveScore, ")
             }
         }
+        println (" ")
 
         if (sameScores) {
             move = (0..8).random()
