@@ -27,15 +27,15 @@ class GameActivity : AppCompatActivity() {
     private var startingDepth: Int = 0
 
     private fun getBoard (): Array<String> {
-        var cell1 = button1.text as String
-        var cell2 = button2.text as String
-        var cell3 = button3.text as String
-        var cell4 = button4.text as String
-        var cell5 = button5.text as String
-        var cell6 = button6.text as String
-        var cell7 = button7.text as String
-        var cell8 = button8.text as String
-        var cell9 = button9.text as String
+        val cell1 = button1.text as String
+        val cell2 = button2.text as String
+        val cell3 = button3.text as String
+        val cell4 = button4.text as String
+        val cell5 = button5.text as String
+        val cell6 = button6.text as String
+        val cell7 = button7.text as String
+        val cell8 = button8.text as String
+        val cell9 = button9.text as String
 
         return arrayOf(cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cell9)
     }
@@ -48,8 +48,7 @@ class GameActivity : AppCompatActivity() {
 
             win = checkWin()
             if (win) {
-                var playerString: String = turn
-                winner.text = "$playerString Wins!"
+                winner.text = "You Win!" as String
                 winner.setTextColor (Color.parseColor("#007003"))
             }
             else {
@@ -60,13 +59,12 @@ class GameActivity : AppCompatActivity() {
                 }
                 board = getBoard()
                 if (boardIsFull(board)) {
-                    winner.text = "Tie"
+                    winner.text = "Tie" as String
                     winner.setTextColor (Color.parseColor("#000000"))
                 }
                 win = checkWin()
                 if (win) {
-                    var playerString: String = turn
-                    winner.text = "$playerString Wins!"
+                    winner.text = "You Lose!" as String
                     winner.setTextColor (Color.parseColor("#f7362d"))
                 }
             }
@@ -75,8 +73,8 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun scoreBoard (board: Array<String>): Int {
-        var player = "X"
-        var computer = "O"
+        val player = "X"
+        val computer = "O"
 
         // checks rows
         for (i in 0 until 7 step 3) {
@@ -141,7 +139,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun checkWin (): Boolean {
-        var board = getBoard()
+        val board = getBoard()
 
         // checks rows
         for (i in 0 until 7 step 3) {
@@ -169,7 +167,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun minimax (board: Array<String>, depth: Int, isMaximizing: Boolean): Int {
-        var score: Int = scoreBoard(board)
+        val score: Int = scoreBoard(board)
 
         if (score == 1) {
             return score
@@ -318,7 +316,7 @@ class GameActivity : AppCompatActivity() {
         setContentView(R.layout.activity_game)
 
         val extra = intent.getStringExtra(EXTRA_MESSAGE)
-        gameType = extra
+        gameType = extra as String
 
         button1 = findViewById(R.id.button1)
         button1.text = " "
@@ -339,10 +337,10 @@ class GameActivity : AppCompatActivity() {
         button9 = findViewById(R.id.button9)
         button9.text = " "
         winner = findViewById(R.id.winner)
-        winner.text = "Game in Progress"
+        winner.text = "Game in Progress" as String
         winner.setTextColor (Color.parseColor("#000000"))
         reset = findViewById(R.id.resetButton)
-        reset.text = "Reset"
+        reset.text = "Reset" as String
         mode = findViewById(R.id.mode)
         mode.text = gameType
 
@@ -406,7 +404,7 @@ class GameActivity : AppCompatActivity() {
             button9.text = " "
             turn = "PlayerOne"
             win = false
-            winner.text = "Game in Progress"
+            winner.text = "Game in Progress" as String
             winner.setTextColor (Color.parseColor("#000000"))
             computerMovesFirst = computerMovesFirst == false
 
