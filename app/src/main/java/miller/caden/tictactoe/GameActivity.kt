@@ -79,36 +79,36 @@ class GameActivity : AppCompatActivity() {
         // checks rows
         for (i in 0 until 7 step 3) {
             if (board[i] == board[i+1] && board[i+1] == board[i+2] && board[i] == player) {
-                return -1
+                return -100
             }
             else if (board[i] == board[i+1] && board[i+1] == board[i+2] && board[i] == computer) {
-                return 1
+                return 100
             }
         }
 
         // checks columns
         for (i in 0 until 3) {
             if (board[i] == board[i+3] && board[i+3] == board[i+6] && board[i] == player) {
-                return -1
+                return -100
             }
             else if (board[i] == board[i+3] && board[i+3] == board[i+6] && board[i] == computer) {
-                return 1
+                return 100
             }
         }
 
         // checks diagonals
         if (board[0] == board[4] && board[4] == board[8] && board[0] == player) {
-            return -1
+            return -100
         }
         else if (board[0] == board[4] && board[4] == board[8] && board[0] == computer) {
-            return 1
+            return 100
         }
 
         if (board[2] == board[4] && board[4] == board[6] && board[2] == player) {
-            return -1
+            return -100
         }
         else if (board[2] == board[4] && board[4] == board[6] && board[2] == computer) {
-            return 1
+            return 100
         }
 
         return 0
@@ -169,11 +169,11 @@ class GameActivity : AppCompatActivity() {
     private fun minimax (board: Array<String>, depth: Int, isMaximizing: Boolean): Int {
         val score: Int = scoreBoard(board)
 
-        if (score == 1) {
-            return score
+        if (score == 100) {
+            return score + depth
         }
-        else if (score == -1) {
-            return score
+        else if (score == -100) {
+            return score - depth
         }
         if (boardIsFull(board)) {
             return score
@@ -347,13 +347,13 @@ class GameActivity : AppCompatActivity() {
         turn = "PlayerOne"
 
         if (gameType == "Easy") {
-            startingDepth = 1
-        }
-        else if (gameType == "Medium") {
             startingDepth = 2
         }
+        else if (gameType == "Medium") {
+            startingDepth = 4
+        }
         else if (gameType == "Hard") {
-            startingDepth = 100
+            startingDepth = 10
         }
 
         button1.setOnClickListener() {
