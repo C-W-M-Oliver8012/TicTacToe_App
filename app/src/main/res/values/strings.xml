@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Tic Tac Toe</string>
+    <string name="game_in_progress">Game in Progress</string>
+    <string name="reset">Reset</string>
+    <string name="you_lose">You Lose!</string>
+    <string name="tie">Tie</string>
+    <string name="you_win">You Win!</string>
+    <string name="hard">Hard</string>
+    <string name="medium">Medium</string>
+    <string name="easy">Easy</string>
+    <string name="select_an_option">Select an Option</string>
 </resources>

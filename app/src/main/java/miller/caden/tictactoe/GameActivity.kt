@@ -48,7 +48,7 @@ class GameActivity : AppCompatActivity() {
 
             win = checkWin()
             if (win) {
-                winner.text = "You Win!" as String
+                winner.text = getString(R.string.you_win)
                 winner.setTextColor (Color.parseColor("#007003"))
             }
             else {
@@ -59,12 +59,12 @@ class GameActivity : AppCompatActivity() {
                 }
                 board = getBoard()
                 if (boardIsFull(board)) {
-                    winner.text = "Tie" as String
+                    winner.text = getString(R.string.tie)
                     winner.setTextColor (Color.parseColor("#000000"))
                 }
                 win = checkWin()
                 if (win) {
-                    winner.text = "You Lose!" as String
+                    winner.text = getString(R.string.you_lose)
                     winner.setTextColor (Color.parseColor("#f7362d"))
                 }
             }
@@ -166,7 +166,7 @@ class GameActivity : AppCompatActivity() {
         return false
     }
 
-    private fun minimax (board: Array<String>, depth: Int, alpha: Int, beta: Int, isMaximizing: Boolean): Int {
+    private fun miniMax (board: Array<String>, depth: Int, alpha: Int, beta: Int, isMaximizing: Boolean): Int {
         val score: Int = scoreBoard(board)
 
         if (score == 100) {
@@ -187,7 +187,7 @@ class GameActivity : AppCompatActivity() {
             for (i in 0 until 9) {
                 if (board[i] == " ") {
                     board[i] = "O"
-                    value = max (value, minimax(board, depth - 1, alpha, beta, false))
+                    value = max (value, miniMax(board, depth - 1, alpha, beta, false))
                     val alphaCheck = max (alpha, value)
                     if (alphaCheck >= beta) {
                         break
@@ -202,7 +202,7 @@ class GameActivity : AppCompatActivity() {
             for (i in 0 until 9) {
                 if (board[i] == " ") {
                     board[i] = "X"
-                    value = min (value, minimax(board, depth - 1, alpha, beta, true))
+                    value = min (value, miniMax(board, depth - 1, alpha, beta, true))
                     val betaCheck = min (beta, value)
                     if (alpha >= betaCheck) {
                         break
@@ -224,7 +224,7 @@ class GameActivity : AppCompatActivity() {
         for (i in 0 until 9) {
             if (board[i] == " ") {
                 board[i] = "O"
-                moveScore = minimax(board, startingDepth, -1000, 1000, false)
+                moveScore = miniMax(board, startingDepth, -1000, 1000, false)
                 board[i] = " "
                 evalCount++
                 if (evalCount == 1) {
@@ -345,10 +345,10 @@ class GameActivity : AppCompatActivity() {
         button9 = findViewById(R.id.button9)
         button9.text = " "
         winner = findViewById(R.id.winner)
-        winner.text = "Game in Progress" as String
+        winner.text = getString(R.string.game_in_progress)
         winner.setTextColor (Color.parseColor("#000000"))
         reset = findViewById(R.id.resetButton)
-        reset.text = "Reset" as String
+        reset.text = getString(R.string.reset)
         mode = findViewById(R.id.mode)
         mode.text = gameType
 
@@ -364,43 +364,43 @@ class GameActivity : AppCompatActivity() {
             startingDepth = 10
         }
 
-        button1.setOnClickListener() {
+        button1.setOnClickListener {
             buttonClick (button1)
         }
 
-        button2.setOnClickListener() {
+        button2.setOnClickListener {
             buttonClick (button2)
         }
 
-        button3.setOnClickListener() {
+        button3.setOnClickListener {
             buttonClick (button3)
         }
 
-        button4.setOnClickListener() {
+        button4.setOnClickListener {
             buttonClick (button4)
         }
 
-        button5.setOnClickListener() {
+        button5.setOnClickListener {
             buttonClick (button5)
         }
 
-        button6.setOnClickListener() {
+        button6.setOnClickListener {
             buttonClick (button6)
         }
 
-        button7.setOnClickListener() {
+        button7.setOnClickListener {
             buttonClick (button7)
         }
 
-        button8.setOnClickListener() {
+        button8.setOnClickListener {
             buttonClick (button8)
         }
 
-        button9.setOnClickListener() {
+        button9.setOnClickListener {
             buttonClick (button9)
         }
 
-        reset.setOnClickListener() {
+        reset.setOnClickListener {
             button1.text = " "
             button2.text = " "
             button3.text = " "
@@ -412,7 +412,7 @@ class GameActivity : AppCompatActivity() {
             button9.text = " "
             turn = "PlayerOne"
             win = false
-            winner.text = "Game in Progress" as String
+            winner.text = getString(R.string.game_in_progress)
             winner.setTextColor (Color.parseColor("#000000"))
             computerMovesFirst = computerMovesFirst == false
 
