@@ -215,6 +215,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun bestMove (board: Array<String>):Int {
+        val list = arrayListOf<Int>()
         var best: Int = Double.NEGATIVE_INFINITY.toInt()
         var moveScore: Int
         var move = 0
@@ -233,6 +234,9 @@ class GameActivity : AppCompatActivity() {
                 if (firstScore != moveScore) {
                     sameScores = false
                 }
+                else {
+                    list.add(i)
+                }
                 if (moveScore > best) {
                     best = moveScore
                     move = i
@@ -241,7 +245,8 @@ class GameActivity : AppCompatActivity() {
         }
 
         if (sameScores) {
-            move = (0..8).random()
+            val num = (0 until list.size).random()
+            move = list[num]
         }
         move++
         return move
@@ -249,61 +254,43 @@ class GameActivity : AppCompatActivity() {
 
     private fun computerTurn () {
         val board = getBoard()
-        var useRand = false
+        val r = bestMove(board)
 
-        while (true) {
-            var r = bestMove(board)
-            if (useRand) {
-                r = (1..9).random()
-            }
-
-            if (r == 1 && button1.text == " ") {
-                button1.setTextColor(Color.parseColor("#f7362d"))
-                button1.text = "O"
-                break
-            }
-            else if (r == 2 && button2.text == " ") {
-                button2.setTextColor(Color.parseColor("#f7362d"))
-                button2.text = "O"
-                break
-            }
-            else if (r == 3 && button3.text == " ") {
-                button3.setTextColor(Color.parseColor("#f7362d"))
-                button3.text = "O"
-                break
-            }
-            else if (r == 4 && button4.text == " ") {
-                button4.setTextColor(Color.parseColor("#f7362d"))
-                button4.text = "O"
-                break
-            }
-            else if (r == 5 && button5.text == " ") {
-                button5.setTextColor(Color.parseColor("#f7362d"))
-                button5.text = "O"
-                break
-            }
-            else if (r == 6 && button6.text == " ") {
-                button6.setTextColor(Color.parseColor("#f7362d"))
-                button6.text = "O"
-                break
-            }
-            else if (r == 7 && button7.text == " ") {
-                button7.setTextColor(Color.parseColor("#f7362d"))
-                button7.text = "O"
-                break
-            }
-            else if (r == 8 && button8.text == " ") {
-                button8.setTextColor(Color.parseColor("#f7362d"))
-                button8.text = "O"
-                break
-            }
-            else if (r == 9 && button9.text == " ") {
-                button9.setTextColor(Color.parseColor("#f7362d"))
-                button9.text = "O"
-                break
-            }
-
-            useRand = true
+        if (r == 1 && button1.text == " ") {
+            button1.setTextColor(Color.parseColor("#f7362d"))
+            button1.text = "O"
+        }
+        else if (r == 2 && button2.text == " ") {
+            button2.setTextColor(Color.parseColor("#f7362d"))
+            button2.text = "O"
+        }
+        else if (r == 3 && button3.text == " ") {
+            button3.setTextColor(Color.parseColor("#f7362d"))
+            button3.text = "O"
+        }
+        else if (r == 4 && button4.text == " ") {
+            button4.setTextColor(Color.parseColor("#f7362d"))
+            button4.text = "O"
+        }
+        else if (r == 5 && button5.text == " ") {
+            button5.setTextColor(Color.parseColor("#f7362d"))
+            button5.text = "O"
+        }
+        else if (r == 6 && button6.text == " ") {
+            button6.setTextColor(Color.parseColor("#f7362d"))
+            button6.text = "O"
+        }
+        else if (r == 7 && button7.text == " ") {
+            button7.setTextColor(Color.parseColor("#f7362d"))
+            button7.text = "O"
+        }
+        else if (r == 8 && button8.text == " ") {
+            button8.setTextColor(Color.parseColor("#f7362d"))
+            button8.text = "O"
+        }
+        else if (r == 9 && button9.text == " ") {
+            button9.setTextColor(Color.parseColor("#f7362d"))
+            button9.text = "O"
         }
     }
 
