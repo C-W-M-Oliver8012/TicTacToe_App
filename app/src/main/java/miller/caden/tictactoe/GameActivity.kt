@@ -237,10 +237,8 @@ class GameActivity : AppCompatActivity() {
                     best = moveScore
                     move = i
                 }
-                print ("$moveScore, ")
             }
         }
-        println (" ")
 
         if (sameScores) {
             move = (0..8).random()
